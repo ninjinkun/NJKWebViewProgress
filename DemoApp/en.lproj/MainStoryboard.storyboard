@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JRh-Dj-iEb">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZM-Nt-kuh">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="slk-rx-Bno"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sZM-Nt-kuh" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="AtY-xL-KLc"/>
+                            <constraint firstItem="sZM-Nt-kuh" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="T4j-1n-MiH"/>
+                            <constraint firstItem="sZM-Nt-kuh" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="cvA-rl-x4Y"/>
+                            <constraint firstItem="sZM-Nt-kuh" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="f8a-q1-fXU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xJW-Un-Rb0">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="Yhl-Kg-qiE">
+                            <connections>
+                                <action selector="searchButtonPushed:" destination="2" id="VMx-te-mLy"/>
+                            </connections>
+                        </barButtonItem>
+                        <progressView key="titleView" opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" id="AB7-Mz-J0P">
+                            <rect key="frame" x="53" y="17" width="220" height="11"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="B2b-0M-rMS">
+                            <connections>
+                                <action selector="reloadButtonPushed:" destination="2" id="6cp-Cu-Jf5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="_progressView" destination="AB7-Mz-J0P" id="6Er-o7-68Q"/>
+                        <outlet property="_webView" destination="sZM-Nt-kuh" id="2dW-Vv-kFe"/>
+                        <outlet property="view" destination="3" id="YEb-ol-zb5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="158" y="-30"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xcQ-Rr-lEW">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="JRh-Dj-iEb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QUE-Ht-ozE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="5FV-gh-36t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hj8-Sq-MIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-265" y="-50"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="reloadButtonPushed:"/>
+                <relationship kind="action" name="searchButtonPushed:"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
