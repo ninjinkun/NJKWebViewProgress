@@ -3,8 +3,10 @@ NJKWebViewProgress is a progress interface library for UIWebView. Currently, UIW
 
 <img src="https://raw.github.com/ninjinkun/NJKWebViewProgress/master/DemoApp/Screenshot/screenshot1.png" alt="iOS ScreenShot 1" width="240px" style="width: 240px;" />
 
+NJKWebViewProgress don't use CocoaTouch's private methods. It may be AppStore safe.
+
 # Requirements
-- iOS 5 or lator
+- iOS 5 or later
 - ARC
 
 # Usage
