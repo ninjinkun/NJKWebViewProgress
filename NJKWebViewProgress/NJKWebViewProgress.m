@@ -118,8 +118,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
         [_webViewProxyDelegate webViewDidFinishLoad:webView];
     }
-    [self incrementProgress];
+    
     _loadingCount--;
+    [self incrementProgress];
     
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
 
@@ -141,8 +142,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
         [_webViewProxyDelegate webView:webView didFailLoadWithError:error];
     }
-    [self incrementProgress];
+    
     _loadingCount--;
+    [self incrementProgress];
 
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
 
