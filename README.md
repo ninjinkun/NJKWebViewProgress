@@ -33,6 +33,13 @@ progressProxy.progressBlock = ^(float progress) {
 };
 ```
 
+# Install
+## CocoaPods
+
+```
+pod 'NJKWebViewProgress', :git => 'https://github.com/ninjinkun/NJKWebViewProgress.git'
+```
+
 # License
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
 [MIT]: http://www.opensource.org/licenses/mit-license.php
