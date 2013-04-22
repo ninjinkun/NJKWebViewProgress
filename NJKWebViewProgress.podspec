@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NJKWebViewProgress"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.license      = 'MIT'
   s.summary      = "UIWebView progress"
   s.homepage     = "https://github.com/ninjinkun/NJKWebViewProgress"
