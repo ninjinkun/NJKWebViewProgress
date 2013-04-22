@@ -1,5 +1,5 @@
 //
-//  NIJWebViewProgress.h
+//  NJKWebViewProgress.h
 //
 //  Created by Satoshi Aasano on 4/20/13.
 //  Copyright (c) 2013 Satoshi Asano. All rights reserved.

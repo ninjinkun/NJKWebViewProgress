@@ -43,7 +43,7 @@
     [_webView loadRequest:req];
 }
 
-#pragma mark - NIJWebViewProgressDelegate
+#pragma mark - NJKWebViewProgressDelegate
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
     if (progress == 0.0) {

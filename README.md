@@ -8,16 +8,16 @@ NJKWebViewProgress is a library what tell UIWebView progress. Currently, UIWebVi
 - ARC
 
 # Usage
-Instance `NIJWebViewProgress` and set `UIWebViewDelegate`. If you set `webViewProxyDelegate`, `NIJWebViewProgress` suould perform as a proxy object.
+Instance `NJKWebViewProgress` and set `UIWebViewDelegate`. If you set `webViewProxyDelegate`, `NJKWebViewProgress` suould perform as a proxy object.
 
 ```objc
-NIJWebViewProgress *progressProxy = [[NIJWebViewProgress alloc] init];
+NJKWebViewProgress *progressProxy = [[NJKWebViewProgress alloc] init];
 webView.delegate = progressProxy;
 progressProxy.webViewProxyDelegate = self;
 progressProxy.progressDelegate = self;
 ```
 
-When UIWebView start loading, `NIJWebViewProgress` call delegate method and block with progress.
+When UIWebView start loading, `NJKWebViewProgress` call delegate method and block with progress.
 ```objc
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
