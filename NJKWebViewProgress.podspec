@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name         = "NJKWebViewProgress"
-  s.version      = "0.1.2"
-  s.license      = 'MIT'
-  s.summary      = "UIWebView progress"
+  s.version      = "0.1.3"
+  s.license      = { :type => 'MIT', :file => 'LICENSE' }
+  s.summary      = "UIWebView progress interface."
   s.homepage     = "https://github.com/ninjinkun/NJKWebViewProgress"
   s.authors      = { "ninjinkun" => "ninjin@mac.com" }
   s.source       = { :git => "https://github.com/ninjinkun/NJKWebViewProgress.git", :tag => "v#{s.version}" }
