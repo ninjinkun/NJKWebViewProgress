@@ -37,7 +37,7 @@ progressProxy.progressBlock = ^(float progress) {
 ## CocoaPods
 
 ```
-pod 'NJKWebViewProgress', :git => 'https://github.com/ninjinkun/NJKWebViewProgress.git'
+pod 'NJKWebViewProgress'
 ```
 
 # License
