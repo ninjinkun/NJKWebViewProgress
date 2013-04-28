@@ -96,8 +96,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     }
 
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
+
     BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
-    if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation  && navigationType != UIWebViewNavigationTypeOther && navigationType != UIWebViewNavigationTypeBackForward) {
+    if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward) {
         [self reset];
     }
     return ret;
