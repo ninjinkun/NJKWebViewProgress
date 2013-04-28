@@ -134,8 +134,10 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
+    NSString *currentURL = [webView stringByEvaluatingJavaScriptFromString:@"location.href"];
+    BOOL isRedirect = ![currentURL isEqualToString:webView.request.mainDocumentURL.absoluteString];
     BOOL complete = [readyState isEqualToString:@"complete"];
-    if (complete) {
+    if (complete && !isRedirect) {
         [self completeProgress];
     }
 }
@@ -157,8 +159,11 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@'; document.body.appendChild(iframe);  }, false);", completeRPCURL];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
+    
+    NSString *currentURL = [webView stringByEvaluatingJavaScriptFromString:@"location.href"];
+    BOOL isRedirect = ![currentURL isEqualToString:webView.request.mainDocumentURL.absoluteString];
     BOOL complete = [readyState isEqualToString:@"complete"];
-    if (complete) {
+    if (complete && !isRedirect) {
         [self completeProgress];
     }
 }
