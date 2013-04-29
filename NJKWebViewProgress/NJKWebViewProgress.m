@@ -17,6 +17,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
 {
     NSUInteger _loadingCount;
     NSUInteger _maxLoadCount;
+    NSURL *_currentURL;
     BOOL _interactive;
 }
 
@@ -99,6 +100,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
 
     BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
     if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward) {
+        _currentURL = request.URL;
         [self reset];
     }
     return ret;
@@ -134,10 +136,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
-    NSString *currentURL = [webView stringByEvaluatingJavaScriptFromString:@"location.href"];
-    BOOL isRedirect = ![currentURL isEqualToString:webView.request.mainDocumentURL.absoluteString];
+    BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
     BOOL complete = [readyState isEqualToString:@"complete"];
-    if (complete && !isRedirect) {
+    if (complete && isNotRedirect) {
         [self completeProgress];
     }
 }
@@ -160,10 +161,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
-    NSString *currentURL = [webView stringByEvaluatingJavaScriptFromString:@"location.href"];
-    BOOL isRedirect = ![currentURL isEqualToString:webView.request.mainDocumentURL.absoluteString];
+    BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
     BOOL complete = [readyState isEqualToString:@"complete"];
-    if (complete && !isRedirect) {
+    if (complete && isNotRedirect) {
         [self completeProgress];
     }
 }
