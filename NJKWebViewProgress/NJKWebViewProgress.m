@@ -80,14 +80,14 @@ static const float afterInteractiveMaxProgressValue = 0.9;
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    BOOL ret = YES;
-    if ([_webViewProxyDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-        ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-    }
-    
     if ([request.URL.absoluteString isEqualToString:completeRPCURL]) {
         [self completeProgress];
         return NO;
+    }
+    
+    BOOL ret = YES;
+    if ([_webViewProxyDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
+        ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
     
     BOOL isFragmentJump = NO;
@@ -95,9 +95,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
         isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
     }
-
+    
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-
+    
     BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
     if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation) {
         _currentURL = request.URL;
@@ -111,10 +111,10 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
         [_webViewProxyDelegate webViewDidStartLoad:webView];
     }
-
+    
     _loadingCount++;
     _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
-
+    
     [self startProgress];
 }
 
@@ -128,7 +128,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     [self incrementProgress];
     
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-
+    
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -151,9 +151,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     
     _loadingCount--;
     [self incrementProgress];
-
+    
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-
+    
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -168,7 +168,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     }
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark Method Forwarding
 // for future UIWebViewDelegate impl
 
