@@ -95,9 +95,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
         NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
         isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
     }
-    
+
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-    
+
     BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
     if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation) {
         _currentURL = request.URL;
