@@ -111,10 +111,10 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
         [_webViewProxyDelegate webViewDidStartLoad:webView];
     }
-    
+
     _loadingCount++;
     _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
-    
+
     [self startProgress];
 }
 
@@ -128,7 +128,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     [self incrementProgress];
     
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-    
+
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -151,9 +151,9 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     
     _loadingCount--;
     [self incrementProgress];
-    
+
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-    
+
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -168,7 +168,7 @@ static const float afterInteractiveMaxProgressValue = 0.9;
     }
 }
 
-#pragma mark -
+#pragma mark - 
 #pragma mark Method Forwarding
 // for future UIWebViewDelegate impl
 
