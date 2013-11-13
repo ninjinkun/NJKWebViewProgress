@@ -80,14 +80,14 @@ static const float afterInteractiveMaxProgressValue = 0.9;
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    BOOL ret = YES;
-    if ([_webViewProxyDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-        ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-    }
-    
     if ([request.URL.absoluteString isEqualToString:completeRPCURL]) {
         [self completeProgress];
         return NO;
+    }
+    
+    BOOL ret = YES;
+    if ([_webViewProxyDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
+        ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
     
     BOOL isFragmentJump = NO;
