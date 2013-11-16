@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260C2937183704EE0099D1B6 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C2936183704EE0099D1B6 /* NJKWebViewProgressView.m */; };
 		2677297317245E5C00D4E159 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677297217245E5C00D4E159 /* NJKWebViewProgress.m */; };
 		2677297817245E7900D4E159 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677297517245E7900D4E159 /* AppDelegate.m */; };
 		2677297917245E7900D4E159 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2677297717245E7900D4E159 /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		260C2935183704EE0099D1B6 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NJKWebViewProgressView.h; path = NJKWebViewProgress/NJKWebViewProgressView.h; sourceTree = SOURCE_ROOT; };
+		260C2936183704EE0099D1B6 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NJKWebViewProgressView.m; path = NJKWebViewProgress/NJKWebViewProgressView.m; sourceTree = SOURCE_ROOT; };
 		2677297117245E5C00D4E159 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NJKWebViewProgress.h; path = NJKWebViewProgress/NJKWebViewProgress.h; sourceTree = SOURCE_ROOT; };
 		2677297217245E5C00D4E159 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NJKWebViewProgress.m; path = NJKWebViewProgress/NJKWebViewProgress.m; sourceTree = SOURCE_ROOT; };
 		2677297417245E7900D4E159 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DemoApp/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -56,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		260C2938183713360099D1B6 /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				2677297117245E5C00D4E159 /* NJKWebViewProgress.h */,
+				2677297217245E5C00D4E159 /* NJKWebViewProgress.m */,
+				260C2935183704EE0099D1B6 /* NJKWebViewProgressView.h */,
+				260C2936183704EE0099D1B6 /* NJKWebViewProgressView.m */,
+			);
+			name = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
 		2677298517245EB000D4E159 /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,12 +110,11 @@
 		26E5744F172235B500203262 /* DemoApp */ = {
 			isa = PBXGroup;
 			children = (
+				260C2938183713360099D1B6 /* NJKWebViewProgress */,
 				2677297417245E7900D4E159 /* AppDelegate.h */,
 				2677297517245E7900D4E159 /* AppDelegate.m */,
 				2677297617245E7900D4E159 /* ViewController.h */,
 				2677297717245E7900D4E159 /* ViewController.m */,
-				2677297117245E5C00D4E159 /* NJKWebViewProgress.h */,
-				2677297217245E5C00D4E159 /* NJKWebViewProgress.m */,
 				26E57450172235B500203262 /* Supporting Files */,
 			);
 			name = DemoApp;
@@ -189,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2677297317245E5C00D4E159 /* NJKWebViewProgress.m in Sources */,
+				260C2937183704EE0099D1B6 /* NJKWebViewProgressView.m in Sources */,
 				2677297817245E7900D4E159 /* AppDelegate.m in Sources */,
 				2677297917245E7900D4E159 /* ViewController.m in Sources */,
 				2677298117245E8E00D4E159 /* main.m in Sources */,
@@ -279,7 +293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoApp/DemoApp-Prefix.pch";
 				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -292,7 +306,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoApp/DemoApp-Prefix.pch";
 				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
