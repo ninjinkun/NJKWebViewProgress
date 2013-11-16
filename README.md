@@ -33,6 +33,8 @@ progressProxy.progressBlock = ^(float progress) {
 };
 ```
 
+This repository contains iOS 7 Safari style bar `NJKWebViewProgressView`. You can choose `NJKWebViewProgressView`, `UIProgressView` or your custom bar.
+
 # Install
 ## CocoaPods
 
