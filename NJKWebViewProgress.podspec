@@ -9,4 +9,10 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '4.3'
   s.source_files = 'NJKWebViewProgress'
   s.requires_arc = true
+  s.subspec 'Core' do |ss|
+    ss.source_files = 'NJKWebViewProgress/NJKWebViewProgress.{h,m}'
+  end
+  s.subspec 'ProgressView' do |ss|
+    ss.source_files = 'NJKWebViewProgress/NJKWebViewProgressView.{h,m}'
+  end
 end
