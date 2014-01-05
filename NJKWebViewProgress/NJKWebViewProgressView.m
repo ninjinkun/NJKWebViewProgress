@@ -17,7 +17,7 @@
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _progressBarView = [[UIView alloc] initWithFrame:self.bounds];
         _progressBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _progressBarView.backgroundColor = UIApplication.sharedApplication.delegate.window.tintColor;
+        _progressBarView.backgroundColor = [UIColor colorWithRed:22.f / 255.f green:126.f / 255.f blue:251.f / 255.f alpha:1.0]; // iOS7 Safari bar color
         [self addSubview:_progressBarView];
 
         _barAnimationDuration = 0.27f;
