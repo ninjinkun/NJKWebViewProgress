@@ -13,10 +13,10 @@ NJKWebViewProgress don't use CocoaTouch's private methods. It's AppStore safe.
 Instance `NJKWebViewProgress` and set `UIWebViewDelegate`. If you set `webViewProxyDelegate`, `NJKWebViewProgress` should perform as a proxy object.
 
 ```objc
-NJKWebViewProgress *progressProxy = [[NJKWebViewProgress alloc] init];
-webView.delegate = progressProxy;
-progressProxy.webViewProxyDelegate = self;
-progressProxy.progressDelegate = self;
+_progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
+webView.delegate = _progressProxy;
+_progressProxy.webViewProxyDelegate = self;
+_progressProxy.progressDelegate = self;
 ```
 
 When UIWebView start loading, `NJKWebViewProgress` call delegate method and block with progress.
