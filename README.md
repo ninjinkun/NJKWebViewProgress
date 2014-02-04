@@ -5,6 +5,11 @@ NJKWebViewProgress is a progress interface library for UIWebView. Currently, UIW
 
 NJKWebViewProgress don't use CocoaTouch's private methods. It's AppStore safe.
 
+# Used in Production
+- [Yahoo! JAPAN](https://itunes.apple.com/app/yahoo!-japan/id299147843?mt=8)
+- [Facebook Messenger](https://itunes.apple.com/app/facebook-messenger/id454638411?mt=8)
+- [Paper – stories from Facebook](https://itunes.apple.com/us/app/paper-stories-from-facebook/id794163692?mt=8)
+
 # Requirements
 - iOS 4.3 or later
 - ARC
