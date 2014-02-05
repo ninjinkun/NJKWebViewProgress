@@ -1,9 +1,9 @@
 # NJKWebViewProgress
-NJKWebViewProgress is a progress interface library for UIWebView. Currently, UIWebView don't have official progress interface. You can implement progress bar for your in-app browser using this module.
+NJKWebViewProgress is a progress interface library for UIWebView. Currently, UIWebView doesn't have official progress interface. You can implement progress bar for your in-app browser using this module.
 
 <img src="https://raw.github.com/ninjinkun/NJKWebViewProgress/master/DemoApp/Screenshot/screenshot1.png" alt="iOS ScreenShot 1" width="240px" style="width: 240px;" />
 
-NJKWebViewProgress don't use CocoaTouch's private methods. It's AppStore safe.
+NJKWebViewProgress doesn't use CocoaTouch's private methods. It's AppStore safe.
 
 # Used in Production
 - [Yahoo! JAPAN](https://itunes.apple.com/app/yahoo!-japan/id299147843?mt=8)
