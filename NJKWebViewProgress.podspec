@@ -7,7 +7,6 @@ Pod::Spec.new do |s|
   s.authors      = { "ninjinkun" => "ninjin@mac.com" }
   s.source       = { :git => "https://github.com/ninjinkun/NJKWebViewProgress.git", :tag => "v#{s.version}" }
   s.platform     = :ios, '4.3'
-  s.source_files = 'NJKWebViewProgress'
   s.requires_arc = true
   s.subspec 'Core' do |ss|
     ss.source_files = 'NJKWebViewProgress/NJKWebViewProgress.{h,m}'
