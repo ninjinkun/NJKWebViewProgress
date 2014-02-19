@@ -36,6 +36,12 @@
     [self setProgress:progress animated:NO];
 }
 
+- (void)setProgressBarColor:(UIColor *)progressBarColor
+{
+    _progressBarColor = progressBarColor;
+    _progressBarView.backgroundColor = progressBarColor;
+}
+
 - (void)setProgress:(float)progress animated:(BOOL)animated
 {
     BOOL isGrowing = progress > 0.0;
