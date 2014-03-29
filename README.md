@@ -37,6 +37,18 @@ progressProxy.progressBlock = ^(float progress) {
 };
 ```
 
+You can determine the current state of the document by comparing the `progress` value to one of the provided constants:
+
+```objc
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+{
+    if (progress == NJKInteractiveProgressValue) {
+        // The web view has finished parsing the document,
+        // but is still loading sub-resources
+    }
+}
+```
+
 This repository contains iOS 7 Safari style bar `NJKWebViewProgressView`. You can choose `NJKWebViewProgressView`, `UIProgressView` or your custom bar.
 
 # Install
