@@ -14,6 +14,10 @@
 #define njk_weak unsafe_unretained
 #endif
 
+extern const float NJKInitialProgressValue;
+extern const float NJKInteractiveProgressValue;
+extern const float NJKFinalProgressValue;
+
 typedef void (^NJKWebViewProgressBlock)(float progress);
 @protocol NJKWebViewProgressDelegate;
 @interface NJKWebViewProgress : NSObject<UIWebViewDelegate>

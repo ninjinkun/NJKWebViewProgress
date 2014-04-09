@@ -9,9 +9,9 @@
 
 NSString *completeRPCURL = @"webviewprogressproxy:///complete";
 
-static const float initialProgressValue = 0.1;
-static const float beforeInteractiveMaxProgressValue = 0.5;
-static const float afterInteractiveMaxProgressValue = 0.9;
+const float NJKInitialProgressValue = 0.1f;
+const float NJKInteractiveProgressValue = 0.5f;
+const float NJKFinalProgressValue = 0.9f;
 
 @implementation NJKWebViewProgress
 {
@@ -33,15 +33,15 @@ static const float afterInteractiveMaxProgressValue = 0.9;
 
 - (void)startProgress
 {
-    if (_progress < initialProgressValue) {
-        [self setProgress:initialProgressValue];
+    if (_progress < NJKInitialProgressValue) {
+        [self setProgress:NJKInitialProgressValue];
     }
 }
 
 - (void)incrementProgress
 {
     float progress = self.progress;
-    float maxProgress = _interactive ? afterInteractiveMaxProgressValue : beforeInteractiveMaxProgressValue;
+    float maxProgress = _interactive ? NJKFinalProgressValue : NJKInteractiveProgressValue;
     float remainPercent = (float)_loadingCount / (float)_maxLoadCount;
     float increment = (maxProgress - progress) * remainPercent;
     progress += increment;
