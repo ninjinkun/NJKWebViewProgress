@@ -172,6 +172,17 @@ const float NJKFinalProgressValue = 0.9f;
 #pragma mark Method Forwarding
 // for future UIWebViewDelegate impl
 
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ( [super respondsToSelector:aSelector] )
+        return YES;
+    
+    if ([self.webViewProxyDelegate respondsToSelector:aSelector])
+        return YES;
+    
+    return NO;
+}
+
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
     NSMethodSignature *signature = [super methodSignatureForSelector:selector];
