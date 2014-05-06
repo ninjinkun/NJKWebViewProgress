@@ -13,22 +13,33 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.userInteractionEnabled = NO;
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        _progressBarView = [[UIView alloc] initWithFrame:self.bounds];
-        _progressBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        UIColor *tintColor = [UIColor colorWithRed:22.f / 255.f green:126.f / 255.f blue:251.f / 255.f alpha:1.0]; // iOS7 Safari bar color
-        if ([UIApplication.sharedApplication.delegate.window respondsToSelector:@selector(setTintColor:)] && UIApplication.sharedApplication.delegate.window.tintColor) {
-            tintColor = UIApplication.sharedApplication.delegate.window.tintColor;
-        }
-        _progressBarView.backgroundColor = tintColor;
-        [self addSubview:_progressBarView];
-
-        _barAnimationDuration = 0.27f;
-        _fadeAnimationDuration = 0.27f;
-        _fadeOutDelay = 0.1f;
+        [self configureViews];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self configureViews];
+}
+
+-(void)configureViews
+{
+    self.userInteractionEnabled = NO;
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _progressBarView = [[UIView alloc] initWithFrame:self.bounds];
+    _progressBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    UIColor *tintColor = [UIColor colorWithRed:22.f / 255.f green:126.f / 255.f blue:251.f / 255.f alpha:1.0]; // iOS7 Safari bar color
+    if ([UIApplication.sharedApplication.delegate.window respondsToSelector:@selector(setTintColor:)] && UIApplication.sharedApplication.delegate.window.tintColor) {
+        tintColor = UIApplication.sharedApplication.delegate.window.tintColor;
+    }
+    _progressBarView.backgroundColor = tintColor;
+    [self addSubview:_progressBarView];
+    
+    _barAnimationDuration = 0.27f;
+    _fadeAnimationDuration = 0.27f;
+    _fadeOutDelay = 0.1f;
 }
 
 -(void)setProgress:(float)progress
