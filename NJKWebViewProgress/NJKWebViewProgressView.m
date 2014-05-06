@@ -13,7 +13,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self didInitView];
+        [self configureViews];
     }
     return self;
 }
@@ -21,10 +21,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self didInitView];
+    [self configureViews];
 }
 
--(void)didInitView
+-(void)configureViews
 {
     self.userInteractionEnabled = NO;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
