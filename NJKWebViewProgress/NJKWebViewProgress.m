@@ -7,7 +7,7 @@
 
 #import "NJKWebViewProgress.h"
 
-NSString *completeRPCURL = @"webviewprogressproxy:///complete";
+NSString *completeRPCURLPath = @"/njkwebviewprogressproxy/complete";
 
 const float NJKInitialProgressValue = 0.1f;
 const float NJKInteractiveProgressValue = 0.5f;
@@ -80,7 +80,7 @@ const float NJKFinalProgressValue = 0.9f;
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([request.URL.absoluteString isEqualToString:completeRPCURL]) {
+    if ([request.URL.path isEqualToString:completeRPCURLPath]) {
         [self completeProgress];
         return NO;
     }
@@ -132,7 +132,7 @@ const float NJKFinalProgressValue = 0.9f;
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
-        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@'; document.body.appendChild(iframe);  }, false);", completeRPCURL];
+        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe);  }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
@@ -157,7 +157,7 @@ const float NJKFinalProgressValue = 0.9f;
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
-        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@'; document.body.appendChild(iframe);  }, false);", completeRPCURL];
+        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe);  }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
