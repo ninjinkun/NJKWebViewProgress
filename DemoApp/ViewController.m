@@ -68,6 +68,7 @@
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
     [_progressView setProgress:progress animated:YES];
+    NSAssert(progress == _progressView.progress, @"Progress is not set correctly");
     self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
