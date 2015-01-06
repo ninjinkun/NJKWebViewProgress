@@ -163,7 +163,7 @@ const float NJKFinalProgressValue = 0.9f;
     
     BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
     BOOL complete = [readyState isEqualToString:@"complete"];
-    if (complete && isNotRedirect) {
+    if ((complete && isNotRedirect) || error) {
         [self completeProgress];
     }
 }
