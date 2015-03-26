@@ -98,8 +98,8 @@ const float NJKFinalProgressValue = 0.9f;
 
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
 
-    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
-    if (ret && !isFragmentJump && isHTTP && isTopLevelNavigation) {
+    BOOL isHTTPOrLocalFile = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"] || [request.URL.scheme isEqualToString:@"file"];
+    if (ret && !isFragmentJump && isHTTPOrLocalFile && isTopLevelNavigation) {
         _currentURL = request.URL;
         [self reset];
     }
