@@ -24,7 +24,12 @@
     [self configureViews];
 }
 
--(void)configureViews
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setProgress: _progress];
+}
+
+- (void)configureViews
 {
     self.userInteractionEnabled = NO;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -70,6 +75,7 @@
             _progressBarView.alpha = 1.0;
         } completion:nil];
     }
+    _progress = progress;
 }
 
 @end
