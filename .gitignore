@@ -1,0 +1,15 @@
+.DS_Store
+xcuserdata
+/build/
+instruments.out
+instrumentscli*.trace
+*.pbxuser
+*.mode2v3
+*.mode1v3
+xcuserdata
+profile
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
