@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "NJKWebViewProgressView.h"
 
 #undef njk_weak
 #if __has_feature(objc_arc_weak)
