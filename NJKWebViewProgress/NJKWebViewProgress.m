@@ -7,7 +7,7 @@
 
 #import "NJKWebViewProgress.h"
 
-NSString *completeRPCURLPath = @"/njkwebviewprogressproxy/complete";
+static NSString *const completeRPCURLPath = @"/njkwebviewprogressproxy/complete";
 
 const float NJKInitialProgressValue = 0.1f;
 const float NJKInteractiveProgressValue = 0.5f;
