@@ -10,15 +10,17 @@
 NSString *completeRPCURLPath = @"/njkwebviewprogressproxy/complete";
 
 const float NJKInitialProgressValue = 0.1f;
-const float NJKInteractiveProgressValue = 0.5f;
+const float NJKInteractiveProgressValue = 1.0f;
 const float NJKFinalProgressValue = 0.9f;
 
 @implementation NJKWebViewProgress
 {
     NSUInteger _loadingCount;
     NSUInteger _maxLoadCount;
+    NSUInteger _timeWeight;
     NSURL *_currentURL;
     BOOL _interactive;
+    NSTimer *_timer;
 }
 
 - (id)init
@@ -26,6 +28,7 @@ const float NJKFinalProgressValue = 0.9f;
     self = [super init];
     if (self) {
         _maxLoadCount = _loadingCount = 0;
+        _timeWeight = 0;
         _interactive = NO;
     }
     return self;
@@ -34,23 +37,47 @@ const float NJKFinalProgressValue = 0.9f;
 - (void)startProgress
 {
     if (_progress < NJKInitialProgressValue) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
+        _timeWeight = 0;
         [self setProgress:NJKInitialProgressValue];
     }
 }
-
+-(void)timerFired:(NSTimer*)timer
+{
+    _timeWeight++;
+    [self incrementProgress];
+    if(_timeWeight>=15)
+    {
+        [timer invalidate];
+    }
+}
 - (void)incrementProgress
 {
     float progress = self.progress;
     float maxProgress = _interactive ? NJKFinalProgressValue : NJKInteractiveProgressValue;
     float remainPercent = (float)_loadingCount / (float)_maxLoadCount;
-    float increment = (maxProgress - progress) * remainPercent;
+    float increment = maxProgress * (1 - remainPercent);
+    if(_timeWeight<7)
+    {
+        increment += 0.08;//time weight
+    }
+    else
+    {
+        increment += 0.02;//time weight
+    }
+    
     progress += increment;
     progress = fmin(progress, maxProgress);
+    if(_loadingCount==0)
+    {
+        [_timer invalidate];
+    }
     [self setProgress:progress];
 }
 
 - (void)completeProgress
 {
+    [_timer invalidate];
     [self setProgress:1.0];
 }
 
@@ -71,6 +98,7 @@ const float NJKFinalProgressValue = 0.9f;
 - (void)reset
 {
     _maxLoadCount = _loadingCount = 0;
+    _timeWeight = 0;
     _interactive = NO;
     [self setProgress:0.0];
 }
@@ -95,9 +123,9 @@ const float NJKFinalProgressValue = 0.9f;
         NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
         isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
     }
-
+    
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-
+    
     BOOL isHTTPOrLocalFile = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"] || [request.URL.scheme isEqualToString:@"file"];
     if (ret && !isFragmentJump && isHTTPOrLocalFile && isTopLevelNavigation) {
         _currentURL = request.URL;
@@ -111,10 +139,9 @@ const float NJKFinalProgressValue = 0.9f;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
         [_webViewProxyDelegate webViewDidStartLoad:webView];
     }
-
+    
     _loadingCount++;
     _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
-
     [self startProgress];
 }
 
@@ -128,7 +155,7 @@ const float NJKFinalProgressValue = 0.9f;
     [self incrementProgress];
     
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-
+    
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -151,9 +178,9 @@ const float NJKFinalProgressValue = 0.9f;
     
     _loadingCount--;
     [self incrementProgress];
-
+    
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
-
+    
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
@@ -168,7 +195,7 @@ const float NJKFinalProgressValue = 0.9f;
     }
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark Method Forwarding
 // for future UIWebViewDelegate impl
 
