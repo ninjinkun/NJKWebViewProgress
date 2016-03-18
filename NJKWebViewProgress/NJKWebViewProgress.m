@@ -59,11 +59,11 @@ const float NJKFinalProgressValue = 0.9f;
     float increment = maxProgress * (1 - remainPercent);
     if(_timeWeight<7)
     {
-        increment += 0.08;//时间权重
+        increment += 0.08;//time weight
     }
     else
     {
-        increment += 0.02;//时间权重
+        increment += 0.02;//time weight
     }
     
     progress += increment;
