@@ -84,12 +84,12 @@ const float NJKFinalProgressValue = 0.9f;
         [self completeProgress];
         return NO;
     }
-    
+
     BOOL ret = YES;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
         ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
-    
+
     BOOL isFragmentJump = NO;
     if (request.URL.fragment) {
         NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
@@ -123,10 +123,10 @@ const float NJKFinalProgressValue = 0.9f;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
         [_webViewProxyDelegate webViewDidFinishLoad:webView];
     }
-    
+
     _loadingCount--;
     [self incrementProgress];
-    
+
     NSString *readyState = [webView stringByEvaluatingJavaScriptFromString:@"document.readyState"];
 
     BOOL interactive = [readyState isEqualToString:@"interactive"];
@@ -135,8 +135,14 @@ const float NJKFinalProgressValue = 0.9f;
         NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe);  }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
-    
-    BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
+
+    BOOL isNotRedirect = YES;
+    if (_currentURL && _currentURL.fragment) {
+        NSString *nonFragmentCurrentURL = [_currentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:_currentURL.fragment] withString:@""];
+        NSString *nonFragmentMainDocumentURL = [webView.request.mainDocumentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:webView.request.mainDocumentURL.fragment] withString:@""];
+        isNotRedirect = _currentURL && [nonFragmentCurrentURL isEqual:nonFragmentMainDocumentURL];
+    }
+
     BOOL complete = [readyState isEqualToString:@"complete"];
     if (complete && isNotRedirect) {
         [self completeProgress];
@@ -148,7 +154,7 @@ const float NJKFinalProgressValue = 0.9f;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
         [_webViewProxyDelegate webView:webView didFailLoadWithError:error];
     }
-    
+
     _loadingCount--;
     [self incrementProgress];
 
@@ -160,7 +166,7 @@ const float NJKFinalProgressValue = 0.9f;
         NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe);  }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
-    
+
     BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
     BOOL complete = [readyState isEqualToString:@"complete"];
     if ((complete && isNotRedirect) || error) {
@@ -168,7 +174,7 @@ const float NJKFinalProgressValue = 0.9f;
     }
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark Method Forwarding
 // for future UIWebViewDelegate impl
 
@@ -176,10 +182,10 @@ const float NJKFinalProgressValue = 0.9f;
 {
     if ( [super respondsToSelector:aSelector] )
         return YES;
-    
+
     if ([self.webViewProxyDelegate respondsToSelector:aSelector])
         return YES;
-    
+
     return NO;
 }
 
