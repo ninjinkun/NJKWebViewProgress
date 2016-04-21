@@ -103,6 +103,12 @@ const float NJKFinalProgressValue = 0.9f;
         _currentURL = request.URL;
         [self reset];
     }
+    if (ret) {
+        _loadingCount++;
+        _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
+        
+        [self startProgress];
+    }
     return ret;
 }
 
@@ -111,11 +117,6 @@ const float NJKFinalProgressValue = 0.9f;
     if ([_webViewProxyDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
         [_webViewProxyDelegate webViewDidStartLoad:webView];
     }
-
-    _loadingCount++;
-    _maxLoadCount = fmax(_maxLoadCount, _loadingCount);
-
-    [self startProgress];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
