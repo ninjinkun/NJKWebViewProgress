@@ -137,9 +137,15 @@ const float NJKFinalProgressValue = 0.9f;
     }
 
     BOOL isNotRedirect = YES;
+    
     if (_currentURL && _currentURL.fragment) {
         NSString *nonFragmentCurrentURL = [_currentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:_currentURL.fragment] withString:@""];
-        NSString *nonFragmentMainDocumentURL = [webView.request.mainDocumentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:webView.request.mainDocumentURL.fragment] withString:@""];
+        NSString *nonFragmentMainDocumentURL = nonFragmentCurrentURL;
+        
+        if (webView.request.mainDocumentURL.fragment) {
+            nonFragmentMainDocumentURL = [webView.request.mainDocumentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:webView.request.mainDocumentURL.fragment] withString:@""];
+        }
+        
         isNotRedirect = _currentURL && [nonFragmentCurrentURL isEqual:nonFragmentMainDocumentURL];
     }
 
