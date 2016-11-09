@@ -75,6 +75,24 @@ const float NJKFinalProgressValue = 0.9f;
     [self setProgress:0.0];
 }
 
+- (BOOL)isFragmentJumpWithWebView:(UIWebView *)webView request:(NSURLRequest *)request{
+    BOOL isFragmentJump = NO;
+    if (request.URL.fragment) {
+        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
+        if (webView.request.URL.fragment) {
+            NSString *nonFragmentMainURL = [webView.request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:webView.request.URL.fragment] withString:@""];
+            if ([nonFragmentURL isEqualToString:nonFragmentMainURL] && ![webView.request.URL.fragment isEqualToString:request.URL.fragment]) {
+                isFragmentJump = YES;
+            }
+        }
+        else
+        {
+            isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
+        }
+    }
+    return isFragmentJump;
+}
+
 #pragma mark -
 #pragma mark UIWebViewDelegate
 
@@ -90,11 +108,7 @@ const float NJKFinalProgressValue = 0.9f;
         ret = [_webViewProxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
     
-    BOOL isFragmentJump = NO;
-    if (request.URL.fragment) {
-        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
-        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
-    }
+    BOOL isFragmentJump = [self isFragmentJumpWithWebView:webView request:request];
 
     BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
 
@@ -136,7 +150,16 @@ const float NJKFinalProgressValue = 0.9f;
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
-    BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
+    BOOL isNotRedirect = YES;
+    //remove fragment
+    if (_currentURL && _currentURL.fragment) {
+        NSString *nonFragmentURL = [_currentURL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:_currentURL.fragment] withString:@""];
+        NSString *nonFragmentMainURL = webView.request.URL.absoluteString;
+        if (webView.request.URL.fragment){
+            nonFragmentMainURL = [webView.request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:webView.request.URL.fragment] withString:@""];
+        }
+        isNotRedirect = [nonFragmentMainURL isEqualToString:nonFragmentURL];
+    }
     BOOL complete = [readyState isEqualToString:@"complete"];
     if (complete && isNotRedirect) {
         [self completeProgress];
