@@ -1,4 +1,7 @@
 # NJKWebViewProgress
+
+[![Build Status](https://travis-ci.org/ninjinkun/NJKWebViewProgress.svg?branch=master)](https://travis-ci.org/ninjinkun/NJKWebViewProgress)
+
 NJKWebViewProgress is a progress interface library for UIWebView. Currently, UIWebView doesn't have official progress interface. You can implement progress bar for your in-app browser using this module.
 
 <img src="https://raw.github.com/ninjinkun/NJKWebViewProgress/master/DemoApp/Screenshot/screenshot1.png" alt="iOS ScreenShot 1" width="240px" style="width: 240px;" />
