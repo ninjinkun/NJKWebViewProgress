@@ -1,8 +1,5 @@
 language: objective-c
-xcode_project: NJKWebViewProgress.xcodeproj
-xcode_scheme: NJKWebViewProgressTests
-xcode_sdk: iphonesimulator
 before_install:
-    - brew update
-    - brew install xctool
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
 script: xctool -project NJKWebViewProgress.xcodeproj -scheme NJKWebViewProgressTests -sdk iphonesimulator run-tests
