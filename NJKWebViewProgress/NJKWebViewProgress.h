@@ -15,6 +15,9 @@
 #define njk_weak unsafe_unretained
 #endif
 
+FOUNDATION_EXPORT double NJKWebViewProgressVersionNumber;
+FOUNDATION_EXPORT const unsigned char NJKWebViewProgressVersionString[];
+
 extern const float NJKInitialProgressValue;
 extern const float NJKInteractiveProgressValue;
 extern const float NJKFinalProgressValue;
