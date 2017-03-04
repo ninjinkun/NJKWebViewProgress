@@ -1,0 +1,4 @@
+language: objective-c
+xcode_project: NJKWebViewProgress.xcodeproj
+xcode_scheme: NJKWebViewProgressTests
+xcode_sdk: iphonesimulator
