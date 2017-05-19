@@ -132,7 +132,7 @@ const float NJKFinalProgressValue = 0.9f;
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
-        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe); setTimeout(function() { document.body.removeChild(iframe) }, 0); }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
+        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe); setTimeout(function() { document.body.removeChild(iframe); }, 0); }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
@@ -157,7 +157,7 @@ const float NJKFinalProgressValue = 0.9f;
     BOOL interactive = [readyState isEqualToString:@"interactive"];
     if (interactive) {
         _interactive = YES;
-        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe); setTimeout(function() { document.body.removeChild(iframe) }, 0); }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
+        NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframe = document.createElement('iframe'); iframe.style.display = 'none'; iframe.src = '%@://%@%@'; document.body.appendChild(iframe); setTimeout(function() { document.body.removeChild(iframe); }, 0); }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
