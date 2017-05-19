@@ -133,8 +133,7 @@ const float NJKFinalProgressValue = 0.9f;
     if (interactive) {
         _interactive = YES;
         NSString *waitForCompleteJS = [NSString stringWithFormat:@"window.addEventListener('load',function() { var iframeId = 'NJKWEBVIEWPROGRESS_MSG_IFRAME'; var iframe = document.getElementById(iframeId); iframe || (iframe =  document.createElement('iframe'), iframe.id = iframeId, iframe.setAttribute('style', 'height:0px !important; width:0px !important; border:none !important; display:none !important;'), iframe.src = '%@://%@%@', document.body.appendChild(iframe));  }, false);", webView.request.mainDocumentURL.scheme, webView.request.mainDocumentURL.host, completeRPCURLPath];
-        [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
-    }
+        [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];    }
     
     BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
     BOOL complete = [readyState isEqualToString:@"complete"];
