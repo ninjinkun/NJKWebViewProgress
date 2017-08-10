@@ -161,11 +161,20 @@ const float NJKFinalProgressValue = 0.9f;
         [webView stringByEvaluatingJavaScriptFromString:waitForCompleteJS];
     }
     
-    BOOL isNotRedirect = _currentURL && [_currentURL isEqual:webView.request.mainDocumentURL];
+    BOOL isNotRedirect = [[self nonFragmentURL:_currentURL] isEqual:[self nonFragmentURL: webView.request.mainDocumentURL]];
     BOOL complete = [readyState isEqualToString:@"complete"];
     if ((complete && isNotRedirect) || error) {
         [self completeProgress];
     }
+}
+
+- (NSURL *)nonFragmentURL:(NSURL *)sourceUrl{
+    NSURL *nonFragmentUrl = sourceUrl;
+    if(sourceUrl && sourceUrl.fragment){
+        NSString *nonFragmentUrlStr = [sourceUrl.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:sourceUrl.fragment] withString:@""];
+        nonFragmentUrl = [NSURL URLWithString:nonFragmentUrlStr];
+    }
+    return nonFragmentUrl;
 }
 
 #pragma mark - 
